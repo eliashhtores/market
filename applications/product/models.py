@@ -10,7 +10,7 @@ class Brand(TimeStampedModel):
         return self.name
 
 
-class Vendor(TimeStampedModel):
+class Provider(TimeStampedModel):
     name = models.CharField(max_length=100)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=40, blank=True, null=True)
@@ -33,11 +33,11 @@ class Product(TimeStampedModel):
 
     barcode = models.CharField(max_length=50, unique=True)
     name = models.CharField(max_length=100)
-    provider = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    provider = models.ForeignKey(Provider, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     expiration_date = models.DateField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    unit = models.CharField(max_length=1, choices=UNIT_CHOICES)
+    unit = models.CharField(max_length=2, choices=UNIT_CHOICES)
     qty_available = models.PositiveIntegerField(default=0)
     cost = models.DecimalField(max_digits=7, decimal_places=2)
     price = models.DecimalField(max_digits=7, decimal_places=2)

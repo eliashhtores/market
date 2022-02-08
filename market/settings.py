@@ -2,6 +2,8 @@ from unipath import Path
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
+
 BASE_DIR = Path(__file__).ancestor(2)
 
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -20,11 +22,11 @@ INSTALLED_APPS = [
     # Third party apps
     "django.contrib.postgres",
     # Local apps
-    'applications.product',
-    'applications.user',
-    'applications.sale',
     'applications.cash_register',
-    'applications.home'
+    'applications.home',
+    'applications.product',
+    'applications.sale',
+    'applications.user',
 ]
 
 MIDDLEWARE = [

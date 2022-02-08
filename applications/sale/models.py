@@ -12,9 +12,9 @@ class Sale(TimeStampedModel):
     INVOICE = 'I'
     NO_RECEIPT = 'N'
 
-    CARD = '0'
-    CASH = '1'
-    OTHER = '2'
+    CARD = 'CR'
+    CASH = 'CA'
+    OTHER = 'O'
 
     INVOICE_TYPE_CHOICES = [
         (TICKET, 'Ticket'),
@@ -35,10 +35,9 @@ class Sale(TimeStampedModel):
     payment_type = models.CharField(max_length=2, choices=PAYMENT_TYPE_CHOICES)
     closed = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # noqa
 
-    objects = SaleManager()
+    objects = DetailManager()
 
     def __str__(self):
         return 'Nº [' + str(self.id) + '] - ' + str(self.date_sale)
@@ -50,7 +49,7 @@ class Detail(TimeStampedModel):
     quantity = models.PositiveIntegerField()
     tax = models.DecimalField(max_digits=5, decimal_places=2)
 
-    objects = SaleDetailManager()
+    objects = DetailManager()
 
     def __str__(self):
         return str(self.sale.id) + ' - ' + str(self.product.name)
@@ -61,7 +60,7 @@ class ShoppingCart(TimeStampedModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
 
-    objects = CarShopManager()
+    objects = ShoppingCartManager()
 
     class Meta:
         ordering = ['-created']

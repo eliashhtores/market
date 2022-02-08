@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from .managers import UserManager
+# from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -32,7 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['full_name']
 
-    objects = UserManager()
+    # objects = UserManager()
 
     def get_email(self):
         return self.email

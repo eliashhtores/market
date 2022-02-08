@@ -1,0 +1,716 @@
+[
+    {
+        "model": "product.brand",
+        "pk": 1,
+        "fields": {
+            "created": "2020-06-05T00:32:41.174Z",
+            "name": "Gloria"
+        }
+    },
+    {
+        "model": "product.brand",
+        "pk": 2,
+        "fields": {
+            "created": "2020-06-05T00:32:46.293Z",
+            "name": "Sirlac"
+        }
+    },
+    {
+        "model": "product.brand",
+        "pk": 3,
+        "fields": {
+            "created": "2020-06-05T00:32:51.831Z",
+            "name": "Surtido"
+        }
+    },
+    {
+        "model": "product.brand",
+        "pk": 4,
+        "fields": {
+            "created": "2020-06-05T00:32:56.793Z",
+            "name": "Trome"
+        }
+    },
+    {
+        "model": "product.provider",
+        "pk": 1,
+        "fields": {
+            "created": "2020-06-05T00:33:35.688Z",
+            "name": "Bella Holandesa",
+            "email": "bellaholandesa@gmail.com",
+            "phone": "124587",
+            "web": "http://bellaho.com"
+        }
+    },
+    {
+        "model": "product.provider",
+        "pk": 2,
+        "fields": {
+            "created": "2020-06-05T00:33:57.417Z",
+            "name": "Gloria",
+            "email": "gloria@gmaiil.com",
+            "phone": "458712",
+            "web": "http://gloria.com"
+        }
+    },
+    {
+        "model": "product.provider",
+        "pk": 3,
+        "fields": {
+            "created": "2020-06-05T00:34:08.705Z",
+            "name": "Alicorp México",
+            "email": null,
+            "phone": "",
+            "web": ""
+        }
+    },
+    {
+        "model": "product.provider",
+        "pk": 4,
+        "fields": {
+            "created": "2020-06-05T00:34:16.783Z",
+            "name": "Distribuidor Surtido",
+            "email": null,
+            "phone": "",
+            "web": ""
+        }
+    },
+    {
+        "model": "product.provider",
+        "pk": 5,
+        "fields": {
+            "created": "2020-06-05T00:34:25.591Z",
+            "name": "Alimentos Cusco SC",
+            "email": null,
+            "phone": "",
+            "web": ""
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 1,
+        "fields": {
+            "created": "2020-05-13T23:21:12.410Z",
+            "barcode": "751271276733",
+            "name": "Yomost",
+            "provider": 1,
+            "brand": 1,
+            "expiration_date": "2023-07-21",
+            "description": "",
+            "unit": "2",
+            "qty_available": 25,
+            "cost": "0.60",
+            "price": "1.00",
+            "sales": 23
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 2,
+        "fields": {
+            "created": "2020-05-13T23:33:32.943Z",
+            "barcode": "751271025072",
+            "name": "Mermelada de fresa Gloria",
+            "provider": 2,
+            "brand": 1,
+            "due_date": "2021-09-16",
+            "description": "",
+            "unit": "2",
+            "quantity": 79,
+            "cost": "1.30",
+            "price": "2.00",
+            "sales": 25
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 3,
+        "fields": {
+            "created": "2020-05-14T16:47:05.275Z",
+            "barcode": "702011075291",
+            "name": "Millows",
+            "provider": 1,
+            "brand": 1,
+            "due_date": "2021-05-30",
+            "description": "Magemelos de colores",
+            "unit": "2",
+            "quantity": 29,
+            "cost": "1.50",
+            "price": "2.30",
+            "sales": 22
+        }
+    },
+    {
+        "model": "product.product",
+        "pk": 4,
+        "fields": {
+            "created": "2020-05-14T17:10:08.391Z",
+            "barcode": "750521000050",
+            "name": "Yogurt Sauco",
+            "provider": 5,
+            "brand": 2,
+            "due_date": "2020-05-28",
+            "description": "Yopgurt natural sabor a sauco",
+            "unit": "1",
+            "quantity": 44,
+            "cost": "1.00",
+            "price": "2.30",
+            "sales": 20
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 1,
+        "fields": {
+            "created": "2020-06-05T00:52:36.344Z",
+            "product": 1,
+            "sale": 1,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 2,
+        "fields": {
+            "created": "2020-06-05T00:52:36.347Z",
+            "product": 2,
+            "sale": 1,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 3,
+        "fields": {
+            "created": "2020-06-05T00:52:36.353Z",
+            "product": 3,
+            "sale": 1,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 4,
+        "fields": {
+            "created": "2020-06-05T00:52:36.358Z",
+            "product": 4,
+            "sale": 1,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 5,
+        "fields": {
+            "created": "2020-06-05T00:52:50.023Z",
+            "product": 4,
+            "sale": 2,
+            "quantity": 3,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 6,
+        "fields": {
+            "created": "2020-06-05T00:53:16.917Z",
+            "product": 1,
+            "sale": 3,
+            "quantity": 2,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 7,
+        "fields": {
+            "created": "2020-06-05T00:53:16.920Z",
+            "product": 2,
+            "sale": 3,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 8,
+        "fields": {
+            "created": "2020-06-05T00:53:16.922Z",
+            "product": 3,
+            "sale": 3,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 9,
+        "fields": {
+            "created": "2020-06-05T00:53:42.208Z",
+            "product": 3,
+            "sale": 4,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 10,
+        "fields": {
+            "created": "2020-06-05T00:53:42.213Z",
+            "product": 4,
+            "sale": 4,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 11,
+        "fields": {
+            "created": "2020-06-05T00:53:54.705Z",
+            "product": 1,
+            "sale": 5,
+            "quantity": 3,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 12,
+        "fields": {
+            "created": "2020-06-05T00:53:54.706Z",
+            "product": 2,
+            "sale": 5,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 13,
+        "fields": {
+            "created": "2020-06-05T00:54:03.969Z",
+            "product": 1,
+            "sale": 6,
+            "quantity": 3,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 14,
+        "fields": {
+            "created": "2020-06-05T00:54:03.971Z",
+            "product": 2,
+            "sale": 6,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 15,
+        "fields": {
+            "created": "2020-06-05T00:54:38.128Z",
+            "product": 1,
+            "sale": 7,
+            "quantity": 3,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 16,
+        "fields": {
+            "created": "2020-06-05T00:54:38.131Z",
+            "product": 2,
+            "sale": 7,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 17,
+        "fields": {
+            "created": "2020-06-05T00:55:13.733Z",
+            "product": 2,
+            "sale": 8,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 18,
+        "fields": {
+            "created": "2020-06-05T00:55:13.735Z",
+            "product": 3,
+            "sale": 8,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 19,
+        "fields": {
+            "created": "2020-06-05T00:55:13.737Z",
+            "product": 4,
+            "sale": 8,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 20,
+        "fields": {
+            "created": "2020-06-05T00:55:28.199Z",
+            "product": 4,
+            "sale": 9,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 21,
+        "fields": {
+            "created": "2020-06-05T00:57:41.342Z",
+            "product": 2,
+            "sale": 10,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 22,
+        "fields": {
+            "created": "2020-06-05T00:57:41.344Z",
+            "product": 3,
+            "sale": 10,
+            "quantity": 2,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 23,
+        "fields": {
+            "created": "2020-06-05T00:58:26.487Z",
+            "product": 1,
+            "sale": 11,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 24,
+        "fields": {
+            "created": "2020-06-05T00:58:26.493Z",
+            "product": 3,
+            "sale": 11,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 25,
+        "fields": {
+            "created": "2020-06-05T00:58:26.499Z",
+            "product": 4,
+            "sale": 11,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 26,
+        "fields": {
+            "created": "2020-06-05T00:58:39.019Z",
+            "product": 3,
+            "sale": 12,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 27,
+        "fields": {
+            "created": "2020-06-05T00:58:39.022Z",
+            "product": 4,
+            "sale": 12,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 28,
+        "fields": {
+            "created": "2020-06-05T00:59:53.311Z",
+            "product": 1,
+            "sale": 13,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "sale.detail",
+        "pk": 29,
+        "fields": {
+            "created": "2020-06-05T00:59:53.314Z",
+            "product": 2,
+            "sale": 13,
+            "quantity": 1,
+            "tax": "0.18"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$hqG2bgIK7WC1$gVEUVidczeo4ZKLlnuLGXuyWFb9fS6Mu1anZz9b/ZOQ=",
+            "last_login": "2020-06-05T00:24:34Z",
+            "is_superuser": true,
+            "email": "neunapp@gmail.com",
+            "full_name": "neunapp",
+            "ocupation": "0",
+            "genero": "M",
+            "date_birth": null,
+            "is_staff": true,
+            "is_active": true,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$QE1Noq5T6Fvw$ZFA9hBgtq4uzRcfSNzl9JfxpO7zxcqKNerW/Z8agZo8=",
+            "last_login": null,
+            "is_superuser": false,
+            "email": "ventas@gmail.com",
+            "full_name": "ventas",
+            "ocupation": "2",
+            "genero": "M",
+            "date_birth": "2020-06-07",
+            "is_staff": false,
+            "is_active": true,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$180000$9go9dEr1ROCO$hfWxfMK9SY/NwZXoiKSDc7BMhXhBgtBbD2U04IljbE4=",
+            "last_login": null,
+            "is_superuser": false,
+            "email": "almacen@gmail.com",
+            "full_name": "Almacen",
+            "ocupation": "1",
+            "genero": "F",
+            "date_birth": "2020-06-19",
+            "is_staff": false,
+            "is_active": true,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 1,
+        "fields": {
+            "created": "2020-06-05T00:52:36.308Z",
+            "date": "2020-01-05T00:52:36Z",
+            "quantity": 4,
+            "amount": "7.60",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 2,
+        "fields": {
+            "created": "2020-06-05T00:52:50.008Z",
+            "date": "2020-01-10T00:52:50Z",
+            "quantity": 3,
+            "amount": "6.90",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 3,
+        "fields": {
+            "created": "2020-06-05T00:53:16.883Z",
+            "date": "2020-01-10T00:53:16Z",
+            "quantity": 4,
+            "amount": "6.30",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 4,
+        "fields": {
+            "created": "2020-06-05T00:53:42.175Z",
+            "date": "2020-02-19T00:53:42Z",
+            "quantity": 2,
+            "amount": "4.60",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 5,
+        "fields": {
+            "created": "2020-06-05T00:53:54.684Z",
+            "date": "2020-02-19T00:53:54Z",
+            "quantity": 4,
+            "amount": "5.00",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 6,
+        "fields": {
+            "created": "2020-06-05T00:54:03.938Z",
+            "date": "2020-02-19T00:54:03Z",
+            "quantity": 4,
+            "amount": "5.00",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 7,
+        "fields": {
+            "created": "2020-06-05T00:54:38.106Z",
+            "date": "2020-03-25T00:54:38Z",
+            "quantity": 4,
+            "amount": "5.00",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 8,
+        "fields": {
+            "created": "2020-06-05T00:55:13.715Z",
+            "date": "2020-03-25T00:55:13Z",
+            "quantity": 3,
+            "amount": "6.60",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 9,
+        "fields": {
+            "created": "2020-06-05T00:55:28.117Z",
+            "date": "2020-03-25T00:55:28Z",
+            "quantity": 1,
+            "amount": "2.30",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 10,
+        "fields": {
+            "created": "2020-06-05T00:57:41.318Z",
+            "date": "2020-04-09T00:57:41Z",
+            "quantity": 3,
+            "amount": "6.60",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 11,
+        "fields": {
+            "created": "2020-06-05T00:58:26.453Z",
+            "date": "2020-04-09T00:58:26Z",
+            "quantity": 3,
+            "amount": "5.60",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 12,
+        "fields": {
+            "created": "2020-06-05T00:58:39.002Z",
+            "date": "2020-04-09T00:58:39Z",
+            "quantity": 2,
+            "amount": "4.60",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    },
+    {
+        "model": "sale.sale",
+        "pk": 13,
+        "fields": {
+            "created": "2020-06-05T00:59:53.281Z",
+            "date": "2020-05-06T00:59:53Z",
+            "quantity": 2,
+            "amount": "3.00",
+            "invoice_type": "2",
+            "payment_type": "1",
+            "closed": true,
+            "user": 1
+        }
+    }
+]
