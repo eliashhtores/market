@@ -7,6 +7,7 @@ class UserManager(BaseUserManager, models.Manager):
     def _create_user(self, email, password, is_staff, is_superuser, is_active, **extra_fields):
         user = self.model(
             email=email,
+            role='0',
             is_staff=is_staff,
             is_superuser=is_superuser,
             is_active=is_active,
