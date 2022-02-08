@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import pre_delete, post_save
+from django.db.models.signals import post_save
 from model_utils.models import TimeStampedModel
 from applications.product.models import Product
 from .managers import SaleManager, DetailManager, ShoppingCartManager
@@ -37,10 +37,10 @@ class Sale(TimeStampedModel):
     canceled = models.BooleanField(default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # noqa
 
-    objects = DetailManager()
+    objects = SaleManager()
 
     def __str__(self):
-        return 'Nº [' + str(self.id) + '] - ' + str(self.date_sale)
+        return 'Nº [' + str(self.id) + '] - ' + str(self.date)
 
 
 class Detail(TimeStampedModel):

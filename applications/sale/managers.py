@@ -1,6 +1,6 @@
 class SaleManager():
     def get_sales_by_date(self, date_start, date_end):
-        return self.filter(date_sale__gte=date_start, date_sale__lte=date_end)
+        return self.filter(sale=date_start, sale__lte=date_end)
 
 
 class DetailManager():
