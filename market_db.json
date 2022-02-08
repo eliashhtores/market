@@ -113,10 +113,10 @@
             "name": "Mermelada de fresa Gloria",
             "provider": 2,
             "brand": 1,
-            "due_date": "2021-09-16",
+            "expiration_date": "2021-09-16",
             "description": "",
             "unit": "2",
-            "quantity": 79,
+            "qty_available": 79,
             "cost": "1.30",
             "price": "2.00",
             "sales": 25
@@ -131,10 +131,10 @@
             "name": "Millows",
             "provider": 1,
             "brand": 1,
-            "due_date": "2021-05-30",
+            "expiration_date": "2021-05-30",
             "description": "Magemelos de colores",
             "unit": "2",
-            "quantity": 29,
+            "qty_available": 29,
             "cost": "1.50",
             "price": "2.30",
             "sales": 22
@@ -149,10 +149,10 @@
             "name": "Yogurt Sauco",
             "provider": 5,
             "brand": 2,
-            "due_date": "2020-05-28",
+            "expiration_date": "2020-05-28",
             "description": "Yopgurt natural sabor a sauco",
             "unit": "1",
-            "quantity": 44,
+            "qty_available": 44,
             "cost": "1.00",
             "price": "2.30",
             "sales": 20
@@ -475,60 +475,6 @@
             "sale": 13,
             "quantity": 1,
             "tax": "0.18"
-        }
-    },
-    {
-        "model": "users.user",
-        "pk": 1,
-        "fields": {
-            "password": "pbkdf2_sha256$180000$hqG2bgIK7WC1$gVEUVidczeo4ZKLlnuLGXuyWFb9fS6Mu1anZz9b/ZOQ=",
-            "last_login": "2020-06-05T00:24:34Z",
-            "is_superuser": true,
-            "email": "neunapp@gmail.com",
-            "full_name": "neunapp",
-            "ocupation": "0",
-            "genero": "M",
-            "date_birth": null,
-            "is_staff": true,
-            "is_active": true,
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "users.user",
-        "pk": 2,
-        "fields": {
-            "password": "pbkdf2_sha256$180000$QE1Noq5T6Fvw$ZFA9hBgtq4uzRcfSNzl9JfxpO7zxcqKNerW/Z8agZo8=",
-            "last_login": null,
-            "is_superuser": false,
-            "email": "ventas@gmail.com",
-            "full_name": "ventas",
-            "ocupation": "2",
-            "genero": "M",
-            "date_birth": "2020-06-07",
-            "is_staff": false,
-            "is_active": true,
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
-        "model": "users.user",
-        "pk": 3,
-        "fields": {
-            "password": "pbkdf2_sha256$180000$9go9dEr1ROCO$hfWxfMK9SY/NwZXoiKSDc7BMhXhBgtBbD2U04IljbE4=",
-            "last_login": null,
-            "is_superuser": false,
-            "email": "almacen@gmail.com",
-            "full_name": "Almacen",
-            "ocupation": "1",
-            "genero": "F",
-            "date_birth": "2020-06-19",
-            "is_staff": false,
-            "is_active": true,
-            "groups": [],
-            "user_permissions": []
         }
     },
     {
