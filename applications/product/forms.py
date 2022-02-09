@@ -16,27 +16,31 @@ class ProductForm(forms.ModelForm):
             'expiration_date': forms.DateInput(
                 format='%Y-%m-%d',
                 attrs={'class': 'form-control', 'type': 'date'}),
-            'cost': forms.NumberInput(attrs={'class': 'form-control'}),
-            'price': forms.NumberInput(attrs={'class': 'form-control'}),
+            'cost': forms.NumberInput(attrs={'class': 'form-control', 'min': '0'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control', 'min': '0'}),
             'qty_available': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
     def clean_barcode(self):
         barcode = self.cleaned_data.get('barcode')
-        if Product.objects.filter(barcode=barcode).exists():
-            raise forms.ValidationError(
-                'A product with this barcode already exists.')
+        if self.instance.pk == None:
+            if Product.objects.filter(barcode=barcode).exists():
+                raise forms.ValidationError(
+                    'A product with this barcode already exists.')
         return barcode
 
     def clean_cost(self):
         cost = self.cleaned_data.get('cost')
-        if cost < 0:
+        if cost <= 0:
             raise forms.ValidationError('Cost must be greater than 0.')
         return cost
 
     def clean_price(self):
         price = self.cleaned_data.get('price')
-        if price < 0:
-            raise forms.ValidationError('Price must be greater than 0.')
+        cost = self.cleaned_data.get('cost')
+        cost = 0 if cost == None else cost
+
+        if price < cost:
+            raise forms.ValidationError('Price must be greater than cost.')
         return price

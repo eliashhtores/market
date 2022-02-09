@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h4 class="d-flex justify-content-center">Do you want to delete this product?</h4>
+
+    <form action="{% url 'product_app:product_delete' product.id %}" method="post">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                Product stock: {{ product.qty_available }}
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">{{ product.name }}</h4>
+                <p class="card-text">Provider: {{ product.provider }}</p>
+                <p class="card-text">Description: {{ product.description }}</p>
+                <p class="card-text">Barcode: {{ product.barcode }}</p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-danger mt-4" href="#">Delete</button>
+        <a class="btn btn-outline-primary mt-4" href="{% url 'product_app:product_list' %}">Return</a>
+    </form>
+
+</div>
+{% endblock %}

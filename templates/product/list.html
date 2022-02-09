@@ -7,25 +7,16 @@
 <div class="container-fluid">
 
     <!-- Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <div class="d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-                <input type="text" class="form-control bg-light border-0" placeholder="Barcode or name..."
-                    aria-label="Search" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
+    <div class="mb-4">
+        <div class="d-flex justify-content-end">
+            <div class="p-1">
+                <a href="{% url 'product_app:product_create' %}" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="text">Add new product</span>
+                </a>
             </div>
-        </div>
-        <div>
-            <a href="{% url 'product_app:product_create' %}" class="btn btn-success btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-plus"></i>
-                </span>
-                <span class="text">Add new product</span>
-            </a>
         </div>
     </div>
 
@@ -68,11 +59,16 @@
                             <td>{{ product.qty_available }}</td>
                             <td>{{ product.sales }}</td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-success btn-circle btn-sm">
-                                    <i class="fas fa-check"></i>
-                                </a>
-                                <a href="#" class="btn btn-info btn-circle btn-sm">
+                                <a href="{% url 'product_app:product_detail' product.id %}" class="btn btn-info btn-sm">
                                     <i class="fas fa-info-circle"></i>
+                                </a>
+                                <a href="{% url 'product_app:product_update' product.id %}"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-pencil-alt	"></i>
+                                </a>
+                                <a href="{% url 'product_app:product_delete' product.id %}"
+                                    class="btn btn-danger btn-sm">
+                                    <i class="far fa-trash-alt"></i>
                                 </a>
                             </td>
                         </tr>
