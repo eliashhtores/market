@@ -1,3 +1,4 @@
+from pipes import Template
 from django.views.generic import View
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -12,11 +13,7 @@ from .utils import render_to_pdf
 
 class ProductListView(ListView):
     template_name = 'product/list.html'
-
-    def get_queryset(self):
-        keyword = self.request.GET.get('keyword', '')
-        queryset = Product.objects.product_search(keyword=keyword)
-        return queryset
+    model = Product
 
 
 class ProductCreateView(CreateView):
@@ -24,12 +21,22 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('product_app:product_list')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['mode'] = 'Create product'
+        return context
+
 
 class ProductUpdateView(UpdateView):
     template_name = 'product/create.html'
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('product_app:product_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['mode'] = 'Update product'
+        return context
 
 
 class ProductDeleteView(DeleteView):
@@ -57,3 +64,16 @@ class ProductPrintView(View):
         }
         pdf = render_to_pdf('product/print.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
+
+
+class ProductReportView(ListView):
+    template_name = 'product/report.html'
+
+    def get_queryset(self):
+        queryset = Product.objects.report_search(
+            start_date=self.request.GET.get('start_date', ''),
+            end_date=self.request.GET.get('end_date', ''),
+            provider=self.request.GET.get('provider', ''),
+            brand=self.request.GET.get('brand', ''),
+        )
+        return queryset

@@ -50,10 +50,12 @@
     </table>
     <div class="row">
         <div class="col-md-6">
-            <a href="{% url 'product_app:product_list' %}" class="btn btn-primary">Return</a>
+            <a href="{% url 'product_app:product_list' %}" class="btn btn-primary"><i
+                    class="fas fa-arrow-alt-circle-left"></i> Return</a>
         </div>
         <div class="col-md-6 d-flex justify-content-end">
-            <a href="{% url 'product_app:product_print' product.id %}" class="btn btn-outline-primary">Print</a>
+            <a href="{% url 'product_app:product_print' product.id %}" class="btn btn-outline-primary"><i
+                    class="fas fa-print"></i> Print</a>
         </div>
     </div>
 </div>
