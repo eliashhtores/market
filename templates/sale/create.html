@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Sale{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" name="barcode" id="barcode" class="form-control" placeholder="Barcode" required>
+                <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="1"
+                    placeholder="Quantity" required>
+                <button type="button" class="btn btn-success">Add Item</button>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary px-5">Pay</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-outline-primary px-5">Latest sales</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-7"></div>
+        <div class="col-5"></div>
+    </div>
+</div>
+
+{% endblock %}
