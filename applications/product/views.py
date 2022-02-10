@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from applications.sale.models import Detail
 from .models import Product
 from .forms import ProductForm
-from utils import render_to_pdf
+from .utils import render_to_pdf
 
 
 class ProductListView(ListView):
@@ -55,5 +55,5 @@ class ProductPrintView(View):
             'product': product,
             'monthly_sales': Detail.objects.get_monthly_sales(self.kwargs['pk'])
         }
-        pdf = render_to_pdf('product/detail.html', data)
+        pdf = render_to_pdf('product/print.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
