@@ -1,7 +1,7 @@
 from datetime import timedelta
 from django.db import models
 from django.utils import timezone
-from django.db.models import Sum
+from django.db.models import Sum, F
 
 
 class SaleManager(models.Manager):
@@ -25,5 +25,8 @@ class DetailManager(models.Manager):
 
 
 class ShoppingCartManager(models.Manager):
-    def get_products_by_barcode(self, barcode):
-        return self.filter(barcode=barcode)
+    def get_total(self):
+        queryset = self.aggregate(total=Sum(
+            F('quantity') * F('product__price'), output_field=models.FloatField()))
+
+        return queryset['total']

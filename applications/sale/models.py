@@ -56,7 +56,7 @@ class Detail(TimeStampedModel):
 
 
 class ShoppingCart(TimeStampedModel):
-    barcode = models.CharField(max_length=13, unique=True)
+    barcode = models.CharField(max_length=50, unique=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
 
