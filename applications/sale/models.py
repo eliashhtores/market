@@ -69,4 +69,4 @@ class ShoppingCart(TimeStampedModel):
         return str(self.product.name)
 
 
-post_save.connect(update_stock, sender=Detail)
+# post_save.connect(update_stock, sender=Detail)

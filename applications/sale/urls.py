@@ -12,5 +12,5 @@ urlpatterns = [
          name='sale_delete'),
     path('sale/delete_all', views.ShoppingCartDeleteAll.as_view(),
          name='sale_delete_all'),
-
+    path('sale/', views.ProcessSaleView.as_view(), name='sale_process'),
 ]

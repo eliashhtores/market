@@ -2,8 +2,9 @@ from django.views.generic import FormView, View, DeleteView
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from applications.product.models import Product
-from .models import ShoppingCart
+from .models import ShoppingCart, Sale
 from .forms import ShoppingCartForm
+from .functions import process_sale
 
 
 class SaleCrateView(FormView):
@@ -63,4 +64,16 @@ class ShoppingCartDeleteAll(View):
 
     def post(self, request, *args, **kwargs):
         ShoppingCart.objects.all().delete()
+        return HttpResponseRedirect(reverse('sale_app:sale_create'))
+
+
+class ProcessSaleView(View):
+
+    def post(self, request, *args, **kwargs):
+        process_sale(
+            self=self,
+            invoice_type=Sale.NO_RECEIPT,
+            payment_type=Sale.CASH,
+            user=request.user,
+        )
         return HttpResponseRedirect(reverse('sale_app:sale_create'))
