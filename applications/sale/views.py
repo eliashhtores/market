@@ -1,4 +1,4 @@
-from django.views.generic import FormView, View, DeleteView
+from django.views.generic import FormView, View, DeleteView, ListView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from applications.product.models import Product
@@ -109,3 +109,24 @@ class SaleCrateVoucherView(View):
         }
         pdf = render_to_pdf('sale/voucher.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
+
+
+class SaleLatestView(ListView):
+    model = Sale
+    template_name = 'sale/latest.html'
+
+    def get_queryset(self):
+        return Sale.objects.get_open_sales()
+
+
+class SaleDeleteView(DeleteView):
+    template_name = 'sale/delete.html'
+    model = Sale
+    success_url = reverse_lazy('sale_app:sale_latest')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.canceled = True
+        self.object.save()
+        Detail.objects.restore_stock(self.object.id)
+        return HttpResponseRedirect(self.get_success_url())

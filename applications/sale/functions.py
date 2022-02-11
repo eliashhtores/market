@@ -17,7 +17,6 @@ def process_sale(self, **kwargs):
             amount=total,
             invoice_type=kwargs.get('invoice_type'),
             payment_type=kwargs.get('payment_type'),
-            closed=True,
             user=kwargs.get('user'),
         )
         # Create the details

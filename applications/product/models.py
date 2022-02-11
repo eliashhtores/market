@@ -21,11 +21,13 @@ class Provider(TimeStampedModel):
 
 
 class Product(TimeStampedModel):
+    PIECE = 'PI'
     KILOGRAM = 'KG'
     LITTER = 'LT'
-    METTER = 'Mt'
+    METTER = 'MT'
 
     UNIT_CHOICES = (
+        (PIECE, 'Piece'),
         (KILOGRAM, 'Kg'),
         (LITTER, 'Lt'),
         (METTER, 'Metter')

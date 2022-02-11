@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load tz %}
+{% block title %}Delete sale{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h2 class="d-flex justify-content-center">Do you want to delete this sale?</h2>
+    <div class="card">
+        <div class="card-header">
+            <h4>Amount: {{ sale.amount }}</h4>
+        </div>
+        <form action="{% url 'sale_app:sale_delete' sale.id %}" method="post">
+            {% csrf_token %}
+            <div class="card-body">
+                <p class="card-text">Number: {{ sale.id }}</p>
+                <p class="card-text">Date: {{ sale.date|timezone:"America/Mexico_City" }}</p>
+                <p class="card-text">Quantity: {{ sale.quantity }}</p>
+                <p class="card-text">Invoice type: {{ sale.get_invoice_type_display }}</p>
+                <p class="card-text">Payment method: {{ sale.get_payment_type_display }}</p>
+                <button type="submit" class="btn btn-danger" href="#">Delete</button>
+                <a class="btn btn-outline-info" href="{% url 'sale_app:sale_latest' %}">Go back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

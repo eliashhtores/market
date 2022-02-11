@@ -10,6 +10,7 @@
 
 <body>
     {% if sale %}
+    {% load tz %}
     <h1>Django Market</h1>
     <table>
         <tbody>
@@ -17,7 +18,7 @@
                 <td>Sale number</td>
                 <td>{{ sale.id }}</td>
                 <td>Date</td>
-                <td>{{ sale.date }}</td>
+                <td>{{ sale.date|timezone:"America/Mexico_City" }}</td>
             </tr>
             <tr>
                 <td>Product quantity</td>
@@ -45,7 +46,7 @@
         </tbody>
     </table>
     {% else %}
-    <p class="text-success">Sale does not exist.</p>
+    <p>Sale does not exist.</p>
     {% endif %}
 </body>
 

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load tz %}
+{% block title %}Latest sales{% endblock %}
+{% block content %}
+
+<div class="container">
+    {% if sale_list %}
+    <h2 class="d-flex justify-content-center">Latest sales</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Cancel</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sale_list %}
+            <tr class="text-left">
+                <th scope="row">{{ sale.id }}</th>
+                <td>{{ sale.date|timezone:"America/Mexico_City" }}</td>
+                <td>{{ sale.quantity }}</td>
+                <td>{{ sale.amount }}</td>
+                <td>
+                    <a href="{% url 'sale_app:sale_delete' sale.id %}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <p class="alert alert-danger">No closed sales registered.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -31,8 +31,9 @@
             <button type="submit" class="btn btn-primary px-5"><i class="fas fa-money-bill"></i> Pay</button>
         </form>
         <div class="col-md-3">
-            <button type="button" class="btn btn-outline-primary px-5"><i class="fas fa-money-check"></i> Latest
-                sales</button>
+            <a href="{% url 'sale_app:sale_latest' %}" class="btn btn-outline-primary px-5">
+                <i class="fas fa-money-check"></i> Latest sales
+            </a>
         </div>
     </div>
     <div class="row mt-4">
@@ -62,7 +63,7 @@
                                     <i class="fas fa-minus"></i>
                                 </button>
                         </form>
-                        <form method="post" action="{% url 'sale_app:sale_delete' product.id %}">
+                        <form method="post" action="{% url 'sale_app:sale_cart_delete' product.id %}">
                             {% csrf_token %}
                             <td class="text-center">
                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -87,7 +88,7 @@
             <a href="#" class="btn btn-primary btn-block px-5 py-3"><i class="fas fa-credit-card"></i> Pay</a>
             <button class="btn btn-success btn-block px-5 py-3" data-toggle="modal" data-target="#chargeModal"><i
                     class="fas fa-print"></i> Charge and print</button>
-            <form method="post" action="{% url 'sale_app:sale_delete_all' %}">
+            <form method="post" action="{% url 'sale_app:sale_delete_cart_all' %}">
                 {% csrf_token%}
                 <div class="mt-3">
                     <button type="submit" class="btn btn-outline-danger btn-block py-3 px-5">
