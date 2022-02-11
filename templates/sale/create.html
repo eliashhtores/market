@@ -85,7 +85,8 @@
                 </div>
             </div>
             <a href="#" class="btn btn-primary btn-block px-5 py-3"><i class="fas fa-credit-card"></i> Pay</a>
-            <a href="#" class="btn btn-success btn-block px-5 py-3"><i class="fas fa-print"></i> Charge and print</a>
+            <button class="btn btn-success btn-block px-5 py-3" data-toggle="modal" data-target="#chargeModal"><i
+                    class="fas fa-print"></i> Charge and print</button>
             <form method="post" action="{% url 'sale_app:sale_delete_all' %}">
                 {% csrf_token%}
                 <div class="mt-3">
@@ -96,6 +97,40 @@
             </form>
         </div>
 
+    </div>
+</div>
+
+<div class="modal fade" id="chargeModal" tabindex="-1" role="dialog" aria-labelledby="chargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="chargeModalLabel">Voucher details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="{% url 'sale_app:sale_voucher' %}" method="post">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <div class="col-md 6">
+                            <label for="invoice">Invoice type</label>
+                            {{ voucher_form.invoice_type }}
+                        </div>
+                        <div class="col-md 6">
+                            <label for="payment">Payment type</label>
+                            {{ voucher_form.payment_type }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Charge</button>
+                </div>
+            </form>
+
+        </div>
     </div>
 </div>
 

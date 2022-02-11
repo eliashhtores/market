@@ -10,7 +10,12 @@ urlpatterns = [
          name='sale_update'),
     path('sale/delete/<pk>', views.ShoppingCartDeleteView.as_view(),
          name='sale_delete'),
-    path('sale/delete_all', views.ShoppingCartDeleteAll.as_view(),
+    path('sale/delete-all', views.ShoppingCartDeleteAll.as_view(),
          name='sale_delete_all'),
-    path('sale/', views.ProcessSaleView.as_view(), name='sale_process'),
+    path('sale/process', views.SaleProcessView.as_view(), name='sale_process'),
+    path('sale/voucher', views.SaleProcessVoucherView.as_view(),
+         name='sale_voucher'),
+    path('sale/create_voucher/<pk>', views.SaleCrateVoucherView.as_view(),
+         name='sale_create_voucher'),
+
 ]

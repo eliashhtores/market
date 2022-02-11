@@ -1,9 +1,10 @@
 from django.views.generic import FormView, View, DeleteView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
 from applications.product.models import Product
-from .models import ShoppingCart, Sale
-from .forms import ShoppingCartForm
+from applications.product.utils import render_to_pdf
+from .models import ShoppingCart, Sale, Detail
+from .forms import ShoppingCartForm, VoucherForm
 from .functions import process_sale
 
 
@@ -16,7 +17,7 @@ class SaleCrateView(FormView):
         context = super().get_context_data(**kwargs)
         context['products'] = ShoppingCart.objects.all().order_by('created')
         context['total'] = ShoppingCart.objects.get_total()
-        # context['form_voucher'] = VoucherForm()
+        context['voucher_form'] = VoucherForm()
 
         return context
 
@@ -67,7 +68,7 @@ class ShoppingCartDeleteAll(View):
         return HttpResponseRedirect(reverse('sale_app:sale_create'))
 
 
-class ProcessSaleView(View):
+class SaleProcessView(View):
 
     def post(self, request, *args, **kwargs):
         process_sale(
@@ -77,3 +78,34 @@ class ProcessSaleView(View):
             user=request.user,
         )
         return HttpResponseRedirect(reverse('sale_app:sale_create'))
+
+
+class SaleProcessVoucherView(FormView):
+    form_class = VoucherForm
+    success_url = 'create'
+
+    def form_valid(self, form):
+        invoice_type = form.cleaned_data['invoice_type']
+        payment_type = form.cleaned_data['payment_type']
+        sale = process_sale(
+            self=self,
+            invoice_type=invoice_type,
+            payment_type=payment_type,
+            user=self.request.user,
+        )
+
+        if sale:
+            return HttpResponseRedirect(reverse('sale_app:sale_create_voucher', kwargs={'pk': sale.id}))
+        return HttpResponseRedirect(reverse('sale_app:sale_create'))
+
+
+class SaleCrateVoucherView(View):
+
+    def get(self, request, *args, **kwargs):
+        sale = Sale.objects.get(id=self.kwargs.get('pk'))
+        data = {
+            'sale': sale,
+            'details': Detail.objects.filter(sale=sale),
+        }
+        pdf = render_to_pdf('sale/voucher.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')

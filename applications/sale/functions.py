@@ -1,4 +1,5 @@
 from datetime import datetime
+from applications.product.models import Product
 from .models import Sale, Detail, ShoppingCart
 
 
@@ -21,6 +22,7 @@ def process_sale(self, **kwargs):
         )
         # Create the details
         sale_details = []
+        sale_products = []
         for cart in shopping_cart:
             sale_detail = Detail(
                 product=cart.product,
@@ -30,14 +32,15 @@ def process_sale(self, **kwargs):
             )
             sale.quantity += cart.quantity
             sale_details.append(sale_detail)
-            # Update the product stock
             product = cart.product
             product.qty_available -= cart.quantity
             product.sales += cart.quantity
-            product.save()
+            sale_products.append(product)
         sale.save()
         # Save the details
         Detail.objects.bulk_create(sale_details)
+        # Update the product stock
+        Product.objects.bulk_update(sale_products, ['qty_available', 'sales'])
         # Delete the shopping cart
         shopping_cart.delete()
         # Return the sale

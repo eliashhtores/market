@@ -1,6 +1,6 @@
 from django import forms
 from applications.product.models import Product
-from .models import ShoppingCart
+from .models import Sale
 
 
 class ShoppingCartForm(forms.Form):
@@ -24,3 +24,17 @@ class ShoppingCartForm(forms.Form):
             self.add_error('quantity', 'Not enough stock')
 
         return cleaned_data
+
+
+class VoucherForm(forms.Form):
+    payment_type = forms.ChoiceField(
+        required=True,
+        choices=Sale.PAYMENT_TYPE_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    invoice_type = forms.ChoiceField(
+        required=True,
+        choices=Sale.INVOICE_TYPE_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voucher</title>
+</head>
+
+<body>
+    {% if sale %}
+    <h1>Django Market</h1>
+    <table>
+        <tbody>
+            <tr>
+                <td>Sale number</td>
+                <td>{{ sale.id }}</td>
+                <td>Date</td>
+                <td>{{ sale.date }}</td>
+            </tr>
+            <tr>
+                <td>Product quantity</td>
+                <td>{{ sale.quantity }}</td>
+                <td>Total</td>
+                <td>$ {{ sale.amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Products</h2>
+    <table>
+        <tbody>
+            <tr>
+                <td><strong>Name</strong></td>
+                <td><strong>Quantity</strong></td>
+                <td><strong>Price</strong></td>
+            </tr>
+            {% for detail in details %}
+            <tr>
+                <td>{{ detail.product.name }}</td>
+                <td>{{ detail.quantity }}</td>
+                <td>$ {{ detail.product.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="text-success">Sale does not exist.</p>
+    {% endif %}
+</body>
+
+</html>
