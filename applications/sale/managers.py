@@ -13,6 +13,24 @@ class SaleManager(models.Manager):
     def get_open_sales(self):
         return self.filter(closed=False, canceled=False)
 
+    def get_daily_sold(self):
+        daily_sold = self.filter(
+            closed=False, canceled=False).aggregate(total=Sum('amount'))
+
+        return daily_sold['total'] if daily_sold['total'] else 0
+
+    def get_daily_canceled(self):
+        daily_canceled = self.filter(
+            closed=False, canceled=True).aggregate(total=Sum('amount'))
+
+        return daily_canceled['total'] if daily_canceled['total'] else 0
+
+    def close_all_sales(self):
+        open_sales = self.get_open_sales()
+        total = open_sales.aggregate(total=Sum('amount'))['total']
+        closed = open_sales.update(closed=True)
+        return closed, total
+
 
 class DetailManager(models.Manager):
     def get_monthly_sales(self, product_id):

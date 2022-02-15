@@ -45,7 +45,8 @@ class Sale(TimeStampedModel):
 
 class Detail(TimeStampedModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    sale = models.ForeignKey(Sale, on_delete=models.CASCADE)
+    sale = models.ForeignKey(
+        Sale, on_delete=models.CASCADE, related_name='sale_details')
     quantity = models.PositiveIntegerField()
     tax = models.DecimalField(max_digits=5, decimal_places=2)
 

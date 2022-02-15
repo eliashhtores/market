@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Close cash register{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-success text-white mb-3">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Today's sales</h4>
+                    <p class="card-text">$ {{ daily_sold }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-primary text-white mb-3">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Orders canceled</h4>
+                    <p class="card-text">$ {{ daily_canceled }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-secondary text-white mb-3">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Total sales</h4>
+                    <p class="card-text">{{ total_sales }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if daily_sold %}
+    <h3>Daily sales detail:</h3>
+    {% for open_sale in open_sales_detail %}
+    <div class="card border-success mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    # {{ open_sale.id }}
+                </div>
+                <div class="col-md-3">
+                    Payment type: {{ open_sale.get_payment_type_display }}
+                </div>
+                <div class="col-md-3">
+                    Invoice type: {{ open_sale.get_invoice_type_display }}
+                </div>
+                <div class="col-md-2">
+                    Quantity: {{ open_sale.quantity }}
+                </div>
+                <div class="col-md-2">
+                    Total: ${{ open_sale.amount }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Sub total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detail in open_sale.sale_details.all %}
+                <tr>
+                    <td>{{ detail.product.name }}</td>
+                    <td>{{ detail.product.price }}</td>
+                    <td>{{ detail.quantity }}</td>
+                    <td>{{ detail.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+    <div class="my-4">
+        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#closeCRModal">
+            Close cash register
+        </button>
+    </div>
+    {% else %}
+    <div class="alert alert-warning">
+        <h4>There are no sales today</h4>
+    </div>
+    {% endif %}
+
+    <div class="modal" id="closeCRModal" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Close cash register?</h3>
+                    <button class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body text-success">
+                    <h5>Total amount: ${{ daily_sold }}</h5>
+                </div>
+                <div class="modal-footer">
+                    <form action="{% url 'cash_register_app:process' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-block">Confirm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

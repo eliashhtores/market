@@ -1,9 +1,10 @@
 from datetime import datetime
+from django.db.models import F, ExpressionWrapper, Prefetch, FloatField
 from applications.product.models import Product
 from .models import Sale, Detail, ShoppingCart
 
 
-def process_sale(self, **kwargs):
+def process_sale(**kwargs):
     TAX = .16
     # Get the shopping cart
     shopping_cart = ShoppingCart.objects.all()
@@ -44,3 +45,18 @@ def process_sale(self, **kwargs):
         shopping_cart.delete()
         # Return the sale
         return sale
+
+
+def open_sales_detail():
+    open_sales = Sale.objects.get_open_sales()
+    results = open_sales.prefetch_related(
+        Prefetch(
+            'sale_details',
+            queryset=Detail.objects.filter(sale__id__in=open_sales).annotate(
+                subtotal=ExpressionWrapper(
+                    F('quantity') * F('product__price'), output_field=FloatField())
+            )
+        )
+    ).order_by('id')
+
+    return results
