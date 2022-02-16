@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Admin panel{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-success text-white mb-3">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Total sales today</h4>
+                    <p class="card-text">$ {{ daily_sold }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-primary text-white mb-3">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Orders canceled</h4>
+                    <p class="card-text">$ {{ daily_canceled }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-danger text-white mb-3">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Products without inventory</h4>
+                    <p class="card-text">{{ no_inventory }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Weekly sales report:</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Sales</th>
+                <th>Total sold</th>
+                <th>Profit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in weekly_sales %}
+            <tr>
+                <td>{{ sale.sale__date__date }}</td>
+                <td>{{ sale.total }}</td>
+                <td>$ {{ sale.total_sold }}</td>
+                <td>$ {{ sale.profit }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

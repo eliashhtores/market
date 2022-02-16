@@ -1,4 +1,3 @@
-from pipes import Template
 from django.views.generic import View
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView

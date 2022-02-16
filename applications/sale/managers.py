@@ -2,7 +2,6 @@ from datetime import timedelta
 from django.db import models
 from django.utils import timezone
 from django.db.models import Sum, F
-
 from applications.product.models import Product
 
 
@@ -53,6 +52,20 @@ class DetailManager(models.Manager):
 
         Product.objects.bulk_update(
             canceled_products, ['qty_available', 'sales'])
+
+    def get_weekly_sales(self):
+        end_date = timezone.now()
+        start_date = end_date - timedelta(days=7)
+        queryset = self.filter(
+            sale__canceled=False,
+            sale__closed=True,
+            created__range=(start_date, end_date)).values('sale__date__date').annotate(
+            total_sold=Sum(F('product__price')*F('quantity'),
+                           output_field=models.FloatField()),
+            profit=Sum(F('product__price')*F('quantity') - F('product__cost') *
+                       F('quantity'), output_field=models.FloatField()),
+            total=Sum('quantity'))
+        return queryset
 
     # def get_details_by_sale(self, product_id):
     #     return self.filter(sale__prod=product_id)

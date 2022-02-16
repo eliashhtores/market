@@ -83,11 +83,6 @@
             Close cash register
         </button>
     </div>
-    {% else %}
-    <div class="alert alert-warning">
-        <h4>There are no sales today</h4>
-    </div>
-    {% endif %}
 
     <div class="modal" id="closeCRModal" style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
@@ -108,6 +103,13 @@
             </div>
         </div>
     </div>
+
+    {% else %}
+    <div class="alert alert-warning">
+        <h4>There are no sales today</h4>
+    </div>
+    {% endif %}
+
 </div>
 
 {% endblock %}
