@@ -6,8 +6,8 @@ from applications.product.models import Product
 
 
 class SaleManager(models.Manager):
-    def get_sales_by_date(self, date_start, date_end):
-        return self.filter(sale=date_start, sale__lte=date_end)
+    def get_sales_by_date(self, start_date, end_date):
+        return self.filter(date__gte=start_date, date__lte=end_date)
 
     def get_open_sales(self):
         return self.filter(closed=False, canceled=False)

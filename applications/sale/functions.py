@@ -60,3 +60,20 @@ def open_sales_detail():
     ).order_by('id')
 
     return results
+
+
+def get_sale_details_by_date(start_date, end_date):
+    if start_date and end_date:
+        sales = Sale.objects.get_sales_by_date(start_date, end_date)
+        results = sales.prefetch_related(
+            Prefetch(
+                'sale_details',
+                queryset=Detail.objects.filter(sale__id__in=sales).annotate(
+                    subtotal=ExpressionWrapper(
+                        F('quantity') * F('product__price'), output_field=FloatField())
+                )
+            )
+        ).order_by('id')
+        return results
+
+    return []

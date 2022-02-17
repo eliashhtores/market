@@ -17,9 +17,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Brand',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('created', model_utils.fields.AutoCreatedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='created')),
+                ('modified', model_utils.fields.AutoLastModifiedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='modified')),
                 ('name', models.CharField(max_length=30)),
             ],
             options={
@@ -27,11 +30,14 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Provider',
+            name='Supplier',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('created', model_utils.fields.AutoCreatedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='created')),
+                ('modified', model_utils.fields.AutoLastModifiedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='modified')),
                 ('name', models.CharField(max_length=100)),
                 ('email', models.EmailField(blank=True, max_length=254, null=True)),
                 ('phone', models.CharField(blank=True, max_length=40, null=True)),
@@ -44,21 +50,27 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Product',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
+                ('created', model_utils.fields.AutoCreatedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='created')),
+                ('modified', model_utils.fields.AutoLastModifiedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='modified')),
                 ('barcode', models.CharField(max_length=50, unique=True)),
                 ('name', models.CharField(max_length=100)),
                 ('expiration_date', models.DateField(blank=True, null=True)),
                 ('description', models.TextField(blank=True, null=True)),
-                ('unit', models.CharField(choices=[('KG', 'Kg'), ('LT', 'Lt'), ('Mt', 'Metter')], max_length=2)),
+                ('unit', models.CharField(choices=[
+                 ('KG', 'Kg'), ('LT', 'Lt'), ('Mt', 'Metter')], max_length=2)),
                 ('qty_available', models.PositiveIntegerField(default=0)),
                 ('cost', models.DecimalField(decimal_places=2, max_digits=7)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=7)),
                 ('sales', models.PositiveIntegerField(default=0)),
                 ('active', models.BooleanField(default=True)),
-                ('brand', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.brand')),
-                ('provider', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.provider')),
+                ('brand', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='product.brand')),
+                ('supplier', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='product.supplier')),
             ],
             options={
                 'abstract': False,

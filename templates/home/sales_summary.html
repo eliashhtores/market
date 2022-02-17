@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load tz %}
+{% block title %}Sales summary{% endblock %}
+{% block content %}
+
+<div class="container">
+    <form class="row" method="get" action="#">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+            </div>
+            {{ form.start_date }}
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+            </div>
+            {{ form.end_date }}
+            <button class="btn btn-primary ml-2" type="submit">Search</button>
+        </div>
+    </form>
+    {% for sale in sales_summary %}
+    <div class="row mt-3">
+        <div class="card border-success my-3 col-md-12">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div><strong>Sale #{{ sale.id }}</strong></div>
+                    <div><strong>Date: {{ sale.date|timezone:"America/Mexico_City" }}</strong></div>
+                    <div><strong>Paid with: {{ sale.get_payment_type_display }}</strong></div>
+                    <div><strong>Invoice: {{ sale.get_invoice_type_display }}</strong></div>
+                    <div><strong>Quantity: {{ sale.quantity }}</strong></div>
+                    <div><strong>Total: $ {{ sale.amount }}</strong></div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for detail in sale.sale_details.all %}
+                <tr>
+                    <td>{{ detail.product }}</td>
+                    <td>$ {{ detail.product.price }}</td>
+                    <td>{{ detail.quantity }}</td>
+                    <td>$ {{ detail.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

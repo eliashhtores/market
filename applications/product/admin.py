@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Brand, Provider, Product
+from .models import Brand, Supplier, Product
 
 
 class BrandAdmin(admin.ModelAdmin):
@@ -9,7 +9,7 @@ class BrandAdmin(admin.ModelAdmin):
     ordering = ('name',)
 
 
-class ProviderAdmin(admin.ModelAdmin):
+class SupplierAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone', 'web')
     list_filter = ('name',)
     search_fields = ('name', 'email', 'phone', 'web')
@@ -17,14 +17,14 @@ class ProviderAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('barcode', 'name', 'provider', 'brand', 'expiration_date',
+    list_display = ('barcode', 'name', 'supplier', 'brand', 'expiration_date',
                     'description', 'unit', 'qty_available', 'cost', 'price', 'sales')
     list_filter = ('name',)
-    search_fields = ('barcode', 'name', 'provider', 'brand', 'expiration_date',
+    search_fields = ('barcode', 'name', 'supplier', 'brand', 'expiration_date',
                      'description', 'unit', 'qty_available', 'cost', 'price', 'sales')
     ordering = ('name',)
 
 
 admin.site.register(Brand, BrandAdmin)
-admin.site.register(Provider, ProviderAdmin)
+admin.site.register(Supplier, SupplierAdmin)
 admin.site.register(Product, ProductAdmin)
