@@ -4,13 +4,12 @@ from django.contrib.auth.models import BaseUserManager
 
 class UserManager(BaseUserManager, models.Manager):
 
-    def _create_user(self, email, full_name, password, is_staff, is_superuser, is_active, **kwargs):
+    def _create_user(self, email, full_name, password, is_staff, is_superuser, **kwargs):
         user = self.model(
             email=email,
             full_name=full_name,
             is_staff=is_staff,
             is_superuser=is_superuser,
-            is_active=is_active,
             **kwargs
         )
         user.set_password(password)
@@ -18,7 +17,7 @@ class UserManager(BaseUserManager, models.Manager):
         return user
 
     def create_user(self, email, full_name, password=None, **kwargs):
-        return self._create_user(email, full_name, password, False, False, True, **kwargs)
+        return self._create_user(email, full_name, password, False, False, **kwargs)
 
     def create_superuser(self, email, full_name, password=None, **kwargs):
-        return self._create_user(email, full_name, password, True, True, True, **kwargs)
+        return self._create_user(email, full_name, password, True, True, **kwargs)

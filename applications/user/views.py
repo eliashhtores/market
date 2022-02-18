@@ -22,7 +22,7 @@ class UserCreateView(FormView):
         return redirect(reverse("user_app:user_list"))
 
     def create_user(self, email, full_name, password=None, **kwargs):
-        return self._create_user(email, full_name, password, False, False, True, **kwargs)
+        return self._create_user(email, full_name, password, False, False, **kwargs)
 
 
 class UserListView(ListView):
