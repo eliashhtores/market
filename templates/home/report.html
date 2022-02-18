@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block title %}Admin reports{% endblock %}
+{% block content %}
+
+<div class="container">
+    {% include "includes/admin_nav.html" %}
+    <h2>Total sales until now: $ {{ total_sold }}</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Total sales</th>
+                <th>Total sold</th>
+                <th>Profit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for monthly_sale in monthly_sales_summary %}
+            <tr>
+                <td>{{ monthly_sale.sale__date__date__month }}/{{ monthly_sale.sale__date__date__year }}</td>
+                <td>{{ monthly_sale.total_sales }}</td>
+                <td>$ {{ monthly_sale.total_sold }}</td>
+                <td>$ {{ monthly_sale.total_profit }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

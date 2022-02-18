@@ -72,7 +72,7 @@ class ProductReportView(ListView):
         queryset = Product.objects.report_search(
             start_date=self.request.GET.get('start_date', ''),
             end_date=self.request.GET.get('end_date', ''),
-            provider=self.request.GET.get('provider', ''),
+            supplier=self.request.GET.get('supplier', ''),
             brand=self.request.GET.get('brand', ''),
         )
         return queryset

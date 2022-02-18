@@ -5,12 +5,12 @@ from .models import Product
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['barcode', 'name', 'provider', 'brand', 'unit', 'expiration_date',
+        fields = ['barcode', 'name', 'supplier', 'brand', 'unit', 'expiration_date',
                   'cost', 'price', 'qty_available', 'description']
         widgets = {
             'barcode': forms.TextInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'provider': forms.Select(attrs={'class': 'form-control'}),
+            'supplier': forms.Select(attrs={'class': 'form-control'}),
             'brand': forms.Select(attrs={'class': 'form-control'}),
             'unit': forms.Select(attrs={'class': 'form-control'}),
             'expiration_date': forms.DateInput(
