@@ -8,17 +8,27 @@ class SupplierPaymentsForm(forms.Form):
         required=True,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
+
+
+class SalesSummaryForm(forms.Form):
     start_date = forms.DateField(
         required=True,
         widget=forms.DateInput(
             format='%Y-%m-%d',
-            attrs={'class': 'form-control', 'type': 'date'}
+            attrs={
+                'class': 'form-control',
+                'type': 'date'
+            }
         )
     )
+
     end_date = forms.DateField(
         required=True,
         widget=forms.DateInput(
             format='%Y-%m-%d',
-            attrs={'class': 'form-control', 'type': 'date'}
+            attrs={
+                'class': 'form-control',
+                'type': 'date'
+            }
         )
     )

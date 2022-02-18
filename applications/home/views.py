@@ -1,7 +1,9 @@
 from django.views.generic import TemplateView, ListView
 from applications.sale.models import Sale, Detail
+from applications.sale.functions import get_sale_details_by_date
 from applications.product.models import Product
 from .forms import SupplierPaymentsForm
+from .forms import SalesSummaryForm
 
 
 class SalesReportView(TemplateView):
@@ -43,3 +45,15 @@ class SupplierPaymentsView(ListView):
         self.extra_context['total_debt'] = total_debt
 
         return sale_list
+
+
+class SalesSummaryView(ListView):
+    template_name = 'home/sales_summary.html'
+    context_object_name = 'sales_summary'
+    extra_context = {'form': SalesSummaryForm}
+
+    def get_queryset(self):
+        start_date = self.request.GET.get('start_date', '')
+        end_date = self.request.GET.get('end_date', '')
+        queryset = get_sale_details_by_date(start_date, end_date)
+        return queryset
