@@ -1,12 +1,13 @@
 from django.views.generic import TemplateView, ListView
 from applications.sale.models import Sale, Detail
 from applications.sale.functions import get_sale_details_by_date
+from applications.user.mixins import AdminPermissionMixin
 from applications.product.models import Product
 from .forms import SupplierPaymentsForm
 from .forms import SalesSummaryForm
 
 
-class SalesReportView(TemplateView):
+class SalesReportView(AdminPermissionMixin, TemplateView):
     template_name = 'home/panel.html'
 
     def get_context_data(self, **kwargs):
@@ -18,7 +19,7 @@ class SalesReportView(TemplateView):
         return context
 
 
-class AdminReportView(ListView):
+class AdminReportView(AdminPermissionMixin, ListView):
     template_name = 'home/report.html'
     context_object_name = 'monthly_sales_summary'
 
@@ -31,7 +32,7 @@ class AdminReportView(ListView):
         return Detail.objects.get_monthly_sales_summary()
 
 
-class SupplierPaymentsView(ListView):
+class SupplierPaymentsView(AdminPermissionMixin, ListView):
     template_name = 'home/supplier_payments.html'
     context_object_name = 'supplier_payments'
     extra_context = {'form': SupplierPaymentsForm}
@@ -47,7 +48,7 @@ class SupplierPaymentsView(ListView):
         return sale_list
 
 
-class SalesSummaryView(ListView):
+class SalesSummaryView(AdminPermissionMixin, ListView):
     template_name = 'home/sales_summary.html'
     context_object_name = 'sales_summary'
     extra_context = {'form': SalesSummaryForm}

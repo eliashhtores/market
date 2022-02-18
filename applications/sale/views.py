@@ -1,6 +1,7 @@
 from django.views.generic import FormView, View, DeleteView, ListView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse, reverse_lazy
+from applications.user.mixins import SalesPermissionMixin
 from applications.product.models import Product
 from applications.product.utils import render_to_pdf
 from .models import ShoppingCart, Sale, Detail
@@ -8,7 +9,7 @@ from .forms import ShoppingCartForm, VoucherForm
 from .functions import process_sale
 
 
-class SaleCrateView(FormView):
+class SaleCrateView(SalesPermissionMixin, FormView):
     template_name = 'sale/create.html'
     form_class = ShoppingCartForm
     success_url = 'create'
@@ -40,7 +41,7 @@ class SaleCrateView(FormView):
         return super(SaleCrateView, self).form_valid(form)
 
 
-class ShoppingCartUpdateView(View):
+class ShoppingCartUpdateView(SalesPermissionMixin, View):
     model = ShoppingCart
 
     def post(self, request, *args, **kwargs):
@@ -56,19 +57,19 @@ class ShoppingCartUpdateView(View):
         return HttpResponseRedirect(reverse('sale_app:sale_create'))
 
 
-class ShoppingCartDeleteView(DeleteView):
+class ShoppingCartDeleteView(SalesPermissionMixin, DeleteView):
     model = ShoppingCart
     success_url = reverse_lazy('sale_app:sale_create')
 
 
-class ShoppingCartDeleteAll(View):
+class ShoppingCartDeleteAll(SalesPermissionMixin, View):
 
     def post(self, request, *args, **kwargs):
         ShoppingCart.objects.all().delete()
         return HttpResponseRedirect(reverse('sale_app:sale_create'))
 
 
-class SaleProcessView(View):
+class SaleProcessView(SalesPermissionMixin, View):
 
     def post(self, request, *args, **kwargs):
         process_sale(
@@ -80,7 +81,7 @@ class SaleProcessView(View):
         return HttpResponseRedirect(reverse('sale_app:sale_create'))
 
 
-class SaleProcessVoucherView(FormView):
+class SaleProcessVoucherView(SalesPermissionMixin, FormView):
     form_class = VoucherForm
     success_url = 'create'
 
@@ -99,7 +100,7 @@ class SaleProcessVoucherView(FormView):
         return HttpResponseRedirect(reverse('sale_app:sale_create'))
 
 
-class SaleCrateVoucherView(View):
+class SaleCrateVoucherView(SalesPermissionMixin, View):
 
     def get(self, request, *args, **kwargs):
         sale = Sale.objects.get(id=self.kwargs.get('pk'))
@@ -111,7 +112,7 @@ class SaleCrateVoucherView(View):
         return HttpResponse(pdf, content_type='application/pdf')
 
 
-class SaleLatestView(ListView):
+class SaleLatestView(SalesPermissionMixin, ListView):
     model = Sale
     template_name = 'sale/latest.html'
 
@@ -119,7 +120,7 @@ class SaleLatestView(ListView):
         return Sale.objects.get_open_sales()
 
 
-class SaleDeleteView(DeleteView):
+class SaleDeleteView(SalesPermissionMixin, DeleteView):
     template_name = 'sale/delete.html'
     model = Sale
     success_url = reverse_lazy('sale_app:sale_latest')

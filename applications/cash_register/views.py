@@ -3,11 +3,12 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import TemplateView, View
 from applications.sale.models import Sale
+from applications.user.mixins import AdminPermissionMixin
 from applications.sale.functions import open_sales_detail
 from .models import CloseCashRegister
 
 
-class CashRegisterCloseView(TemplateView):
+class CashRegisterCloseView(AdminPermissionMixin, TemplateView):
     template_name = 'cash_register/close.html'
 
     def get_context_data(self, **kwargs):
@@ -19,7 +20,7 @@ class CashRegisterCloseView(TemplateView):
         return context
 
 
-class ProcessCloseCashRegisterView(View):
+class ProcessCloseCashRegisterView(AdminPermissionMixin, View):
     def post(self, request, *args, **kwargs):
         closed, total = Sale.objects.close_all_sales()
         if closed:

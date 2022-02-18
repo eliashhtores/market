@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from applications.sale.models import Detail
+from applications.user.mixins import WarehousePermissionMixin
 from .models import Product
 from .forms import ProductForm
 from .utils import render_to_pdf
@@ -15,7 +16,7 @@ class ProductListView(ListView):
     model = Product
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(WarehousePermissionMixin, CreateView):
     template_name = 'product/create.html'
     form_class = ProductForm
     success_url = reverse_lazy('product_app:product_list')
@@ -26,7 +27,7 @@ class ProductCreateView(CreateView):
         return context
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(WarehousePermissionMixin, UpdateView):
     template_name = 'product/create.html'
     model = Product
     form_class = ProductForm
@@ -38,13 +39,13 @@ class ProductUpdateView(UpdateView):
         return context
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(WarehousePermissionMixin, DeleteView):
     template_name = 'product/delete.html'
     model = Product
     success_url = reverse_lazy('product_app:product_list')
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(WarehousePermissionMixin, DetailView):
     template_name = 'product/detail.html'
     model = Product
 
@@ -54,7 +55,7 @@ class ProductDetailView(DetailView):
         return context
 
 
-class ProductPrintView(View):
+class ProductPrintView(WarehousePermissionMixin, View):
     def get(self, request, *args, **kwargs):
         product = Product.objects.get(id=self.kwargs['pk'])
         data = {
@@ -65,7 +66,7 @@ class ProductPrintView(View):
         return HttpResponse(pdf, content_type='application/pdf')
 
 
-class ProductReportView(ListView):
+class ProductReportView(WarehousePermissionMixin, ListView):
     template_name = 'product/report.html'
 
     def get_queryset(self):

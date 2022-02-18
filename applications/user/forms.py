@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from django import forms
 from .models import User
 
@@ -108,3 +109,32 @@ class UserUpdateForm(forms.ModelForm):
             attrs={'class': 'form-control'}
         )
     )
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'form-control form-control-user',
+                'placeholder': 'Enter Email Address...',
+            }
+        ),
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control form-control-user',
+                'placeholder': 'Password',
+            }
+        ),
+    )
+
+    def clean(self):
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
+        if not authenticate(email=email, password=password):
+            self.add_error(
+                "email", "Email or password is incorrect"
+            )
+        return

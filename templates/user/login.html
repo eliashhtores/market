@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'vendor/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="{% static 'css/sb-admin-2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block css %}{% endblock %}
+    <title>Access</title>
+</head>
+
+<body>
+
+    <div class="d-flex flex-row justify-content-center align-items-center login">
+        <div class="col-lg-6">
+            <div class="p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Welcome back!</h1>
+                </div>
+                <form class="user" method="post">
+                    {% csrf_token %}
+                    {% for error in form.email.errors %}
+                    <p class="text-danger">
+                        {{ error|escape }}
+                    </p>
+                    {% endfor %}
+                    <div class="form-group">
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                        Login
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
