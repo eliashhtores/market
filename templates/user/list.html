@@ -6,7 +6,7 @@
 
 <div class="container">
     <h2 class="d-flex justify-content-center mb-4">System users</h2>
-    <table class="table table-hover">
+    <table class="table table-hover" id="dataTable">
         <thead>
             <tr>
                 <th>Email</th>
@@ -18,31 +18,20 @@
             </tr>
         </thead>
         <tbody>
+            {% for user in user_list %}
             <tr>
-                <td>jdoe@gmail.com</td>
-                <td>John</td>
-                <td>Doe</td>
-                <td></td>
-                <td></td>
-                <td></td>
-
+                <td>{{ user.email }}</td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.last_login }}</td>
+                <td>{{ user.get_role_display }}</td>
+                <td>{{ user.is_active }}</td>
+                <td class="text-center">
+                    <a href="{% url 'user_app:user_update' user.id %}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-pencil-alt	"></i>
+                    </a>
+                </td>
             </tr>
-            <tr>
-                <td>will@yahoo.com</td>
-                <td>Will</td>
-                <td>Johnson</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>shannon@yahoo.com</td>
-                <td>Shannon</td>
-                <td>Williams</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
     <div class="d-flex justify-content-center">
