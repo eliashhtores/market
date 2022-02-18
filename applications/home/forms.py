@@ -5,14 +5,14 @@ from applications.product.models import Supplier
 class SupplierPaymentsForm(forms.Form):
     supplier = forms.ModelChoiceField(
         queryset=Supplier.objects.all(),
-        required=True,
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+            }
+        )
     )
 
-
-class SalesSummaryForm(forms.Form):
     start_date = forms.DateField(
-        required=True,
         widget=forms.DateInput(
             format='%Y-%m-%d',
             attrs={
@@ -23,7 +23,28 @@ class SalesSummaryForm(forms.Form):
     )
 
     end_date = forms.DateField(
-        required=True,
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'class': 'form-control',
+                'type': 'date'
+            }
+        )
+    )
+
+
+class SalesSummaryForm(forms.Form):
+    start_date = forms.DateField(
+        widget=forms.DateInput(
+            format='%Y-%m-%d',
+            attrs={
+                'class': 'form-control',
+                'type': 'date'
+            }
+        )
+    )
+
+    end_date = forms.DateField(
         widget=forms.DateInput(
             format='%Y-%m-%d',
             attrs={

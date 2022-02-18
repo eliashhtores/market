@@ -93,7 +93,7 @@ class DetailManager(models.Manager):
         queryset = self.filter(
             sale__canceled=False,
             sale__closed=True,
-            sale__date__range=(
+            sale__date__date__range=(
                 kwargs.get('start_date'),
                 kwargs.get('end_date')
             ),
