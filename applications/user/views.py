@@ -1,9 +1,9 @@
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 from .models import User
-from .forms import UserCreateForm
+from .forms import UserCreateForm, UserUpdateForm
 
 
 class UserCreateView(FormView):
@@ -31,6 +31,13 @@ class UserListView(ListView):
 
 
 class UserUpdateView(UpdateView):
-    model = User
     template_name = 'user/edit.html'
-    fields = ['__all__']
+    model = User
+    form_class = UserUpdateForm
+    success_url = reverse_lazy('user_app:user_list')
+
+
+class UserDeleteView(DeleteView):
+    template_name = 'user/delete.html'
+    model = User
+    success_url = reverse_lazy('user_app:user_list')

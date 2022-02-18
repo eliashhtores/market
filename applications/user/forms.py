@@ -3,6 +3,11 @@ from .models import User
 
 
 class UserCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ("__all__")
+
     email = forms.EmailField(
         required=True,
         widget=forms.EmailInput(
@@ -64,6 +69,42 @@ class UserCreateForm(forms.ModelForm):
                 "repeat_password", "Password and Repeat password are not the same"
             )
 
+
+class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("__all__")
+        fields = ('email', 'full_name', 'role',
+                  'gender', 'date_of_birth', 'is_active')
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={'class': 'form-control'}
+        ),
+    )
+
+    full_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'class': 'form-control'}
+        )
+    )
+
+    role = forms.ChoiceField(
+        choices=User.ROLE_CHOICES,
+        widget=forms.Select(
+            attrs={'class': 'form-control'}
+        )
+    )
+
+    gender = forms.ChoiceField(
+        choices=User.GENDER_CHOICES,
+        widget=forms.Select(
+            attrs={'class': 'form-control'}
+        )
+    )
+
+    date_of_birth = forms.DateField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={'class': 'form-control'}
+        )
+    )

@@ -44,15 +44,3 @@ class ProductForm(forms.ModelForm):
         if price < cost:
             raise forms.ValidationError('Price must be greater than cost.')
         return price
-
-    # Validate form
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     expiration_date = cleaned_data.get('expiration_date')
-    #     qty_available = cleaned_data.get('qty_available')
-
-    #     if expiration_date != None and qty_available != None:
-    #         if expiration_date < qty_available:
-    #             raise forms.ValidationError(
-    #                 'Expiration date must be greater than quantity available.')
-    #     return cleaned_data

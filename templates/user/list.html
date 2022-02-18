@@ -24,7 +24,13 @@
                 <td>{{ user.full_name }}</td>
                 <td>{{ user.last_login }}</td>
                 <td>{{ user.get_role_display }}</td>
-                <td>{{ user.is_active }}</td>
+                <td>
+                    {% if user.is_active %}
+                    <span class="badge badge-success">Active</span>
+                    {% else %}
+                    <span class="badge badge-danger">Inactive</span>
+                    {% endif %}
+                </td>
                 <td class="text-center">
                     <a href="{% url 'user_app:user_update' user.id %}" class="btn btn-primary btn-sm">
                         <i class="fas fa-pencil-alt	"></i>

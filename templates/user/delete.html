@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load static %}
+{%block title%}Delete user{%endblock%}
+{% block content %}
+<div class="container">
+    <h4 class="d-flex justify-content-center">Do you want to delete user {{ user.full_name }}?</h4>
+
+    <form action="{% url 'user_app:user_delete' user.id %}" method="post" class="d-flex justify-content-center">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger mt-4 mr-2" href="#">Delete</button>
+        <a class="btn btn-outline-primary mt-4" href="{% url 'user_app:user_list' %}">Return</a>
+    </form>
+
+</div>
+{% endblock %}
